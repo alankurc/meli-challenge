@@ -1,13 +1,12 @@
 const express = require("express");
 const mysql = require("mysql");
-const util = require("util");
-const cors = require("cors");
+const util = require('util');
+let {response} = require("express");
 
 const app = express();
-const port = 3000;
+const port = process.env.port || 3000;
 
 app.use(express.json());
-app.use(cors())
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -15,45 +14,59 @@ const connection = mysql.createConnection({
     password: "",
     database: "meli-db"
 });
-connection.connect((error) => {
-    if (error) {throw error;}
+connection.connect(error => {
+    if (error) throw error;
+    console.log("Server is running");
 });
 
 const qy = util.promisify(connection.query).bind(connection);
 
 // ALERT RECEIVED
-app.post("/api/alert", async (req, res) => {
+app.post('/alert', async (req, res)=>{
     try {
-        const server = req.body.server;
-        const description = req.body.description;
-        const server_type = req.body.server_type;
+        const server = req.params.server;
+        const description = req.params.description;
+        const server_type = req.params.server_type;
 
-        let query = "INSERT INTO alerts (server, description, server_type) VALUE (?, ?, ?)";
-        let response = await qy(query, [server, description, server_type]);
+        sql = 'INSERT INTO alerts (server, description, server_type) VALUE (?, ?, ?)';
+        response = await qy(sql, [server, description, server_type]);
         res.status(200).send(response[0]);
-    }
-    catch (error) {
-        res.status(500).send("Unexpected error")
-        console.log(req.body.server);
+    } catch (e) {
+        res.status(500).send("Unexpected error");
     }
 });
 
-// GET ALL ALERTS
-app.get("/api/alerts", async (req, res) => {
+// ALL ALERTS
+app.get('/alerts', async (req, res)=>{
     try {
-        let query = 'SELECT * from alerts';
-        let response = await qy(query, []);
+        let sql = 'SELECT server, description, created_at, server_type FROM alerts ORDER BY created_at DESC';
+        let response = await qy(sql, []);
         res.status(200).send(response);
     } catch (e) {
         res.status(500).send("Unexpected error");
     }
 });
 
-// GET ALERTS BY SERVER
-app.get("/api/servers/:server", async (req, res) => {
+// ALERT BY PROBLEM
+app.get('/alerts/:description', async (req, res)=>{
     try {
-        let query = 'SELECT *, COUNT(server) from alerts WHERE server = ?';
-        let response = await qy(query, [req.params.server]);
+        let sql = 'SELECT server, description, created_at, server_type FROM alerts WHERE description LIKE ? ORDER BY created_at DESC';
+        let response = await qy(sql, ['%' + req.params.description + '%']);
+        if (response.length > 0) {
+            res.json(response[0]);
+        } else {
+            res.status(404).send("Alert doesn't exist");
+        }
+    }catch (e) {
+        res.status(500).send("Unexpected error");
+    }
+});
+
+// ALL ALERTS BY SERVER
+app.get('/servers/:server', async (req, res)=>{
+    try {
+        let sql = 'SELECT server, description, created_at, server_type FROM alerts WHERE server = ?';
+        let response = await qy(sql, [req.params.server]);
         if (response.length > 0) {
             res.json(response[0]);
         } else {
@@ -64,17 +77,13 @@ app.get("/api/servers/:server", async (req, res) => {
     }
 });
 
-// GET ALERTS BY DESCRIPTION
-app.get("/api/alerts/:description", async (req, res) => {
+// SHOW 3 SERVER WITH MORE ALERTS IN THE LAST MONTH
+app.get('/servers-more-alerts', async (req, res)=>{
     try {
-        let query = 'SELECT *, COUNT(description) from alerts WHERE description LIKE ?';
-        let response = await qy(query, [req.params.description]);
-        if (response.length > 0) {
-            res.json(response[0]);
-        } else {
-            res.status(404).send("The alert doesn't exist");
-        }
-    }catch (e) {
+        let sql = 'SELECT server, COUNT(server) c FROM alerts GROUP BY server HAVING c >= 1 LIMIT 3'
+        let response = await qy(sql, []);
+        res.status(200).send(response);
+    } catch (e) {
         res.status(500).send("Unexpected error");
     }
 });
