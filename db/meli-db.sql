@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 12-01-2022 a las 04:19:16
+-- Tiempo de generación: 13-01-2022 a las 03:05:31
 -- Versión del servidor: 8.0.21
 -- Versión de PHP: 7.3.21
 
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `alerts` (
   `server` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `server_type` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `server_type` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `alerts`
@@ -45,7 +45,9 @@ INSERT INTO `alerts` (`id`, `server`, `description`, `created_at`, `server_type`
 (1, 'Server01', 'downtime', '2022-01-11 23:55:43', 'onprem'),
 (2, 'Server02', 'no-pingeable', '2021-12-01 23:55:59', 'virtual'),
 (3, 'Server03', 'disk capacity warning', '2022-01-03 23:56:32', 'onprem'),
-(4, 'Server01', 'broken cooler fan', '2022-01-12 00:53:02', 'onprem');
+(4, 'Server01', 'broken cooler fan', '2022-01-12 00:53:02', 'onprem'),
+(5, 'Server02', 'downtime', '2021-12-16 23:55:59', 'onprem'),
+(6, 'Server01', 'disk capacity warning', '2022-01-06 23:55:43', 'virtual');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

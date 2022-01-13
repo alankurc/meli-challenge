@@ -4,7 +4,7 @@ const util = require('util');
 let {response} = require("express");
 
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.port || 80;
 
 app.use(express.json());
 
