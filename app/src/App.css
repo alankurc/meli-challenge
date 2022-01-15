@@ -1,0 +1,8 @@
+.navbar {background-color: #fff159;}
+.search-button {color: #000; background-color: #fff; border-color: #adadad; border-radius: 0;}
+.search-nav {border-radius: 0; border-color: #adadad; border-width: 1px 0 1px 1px}
+.form-check {display: inline-block;}
+.form-check:nth-child(2) {margin-left: 30px;}
+.form-check-input:checked {background-color: #000; border-color: #000;}
+.page-link {color: #000; border-radius: 0;}
+.pagination {justify-content: center;}

@@ -2,7 +2,7 @@ const express = require('express');
 const util = require("util");
 const router = express.Router();
 
-const connection = require('./database');
+const connection = require('../helpers/database');
 
 const qy = util.promisify(connection.query).bind(connection);
 

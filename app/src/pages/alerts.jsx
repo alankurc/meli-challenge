@@ -1,13 +1,28 @@
-import React from "react";
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import {Container} from "reactstrap";
+import Search from '../components/Search'
+import AlertList from "../components/AlertList";
 
-function Alerts() {
+const Alerts = () => {
+    const [alerts, setAlerts] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await axios.get("http://localhost:3050/alerts/");
+            setAlerts(response.data);
+        }
+        fetchData()
+    }, [])
+
     return (
-        <div>
-            <p>Alerts</p>
-            <Link to="/servers">Ver Servers</Link>
-        </div>
-    )
+        <>
+            <Search setAlerts={setAlerts} />
+            <Container>
+                <AlertList alerts={alerts} />
+            </Container>
+        </>
+    );
 }
 
 export default Alerts;
