@@ -3,9 +3,13 @@ import axios from "axios";
 import {Container} from "reactstrap";
 import Search from '../components/Search'
 import AlertList from "../components/AlertList";
+import Error from "../components/Error";
 
 const Alerts = () => {
     const [alerts, setAlerts] = useState([]);
+    const [error, setError] = useState(null);
+
+    const cleanErrors = () => error && setError(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -17,9 +21,9 @@ const Alerts = () => {
 
     return (
         <>
-            <Search setAlerts={setAlerts} />
+            <Search setAlerts={setAlerts} setError={setError} cleanErrors={cleanErrors} />
             <Container>
-                <AlertList alerts={alerts} />
+                {error ? <Error error={error} /> : <AlertList alerts={alerts} />}
             </Container>
         </>
     );

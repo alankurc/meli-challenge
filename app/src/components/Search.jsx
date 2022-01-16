@@ -2,15 +2,14 @@ import React, {useState} from "react";
 import axios from "axios";
 import {Form, FormGroup, Button, Input, Label, Navbar, Container, Row, Col} from "reactstrap";
 
-const Search = ({setAlerts}) => {
+const Search = ({setAlerts, setError, cleanErrors}) => {
 
     const [searchType, setSearchType] = useState("alerts");
-    const [error, setError] = useState("");
 
     const searchAlerts = async (e) => {
         try {
             e.preventDefault();
-
+            cleanErrors();
             const response = await axios.get(`http://localhost:3050/${searchType}/${e.target[0].value}`)
             setAlerts(response.data);
         } catch (e) {
@@ -25,7 +24,6 @@ const Search = ({setAlerts}) => {
                     setError("Ha ocurrio un error");
             }
         }
-
     }
 
     const onSearchTypeChange = ({target: {value}}) => {
