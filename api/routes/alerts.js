@@ -35,7 +35,7 @@ router.get('/alerts/:description', async (req, res)=>{
 // ALL ALERTS BY SERVER
 router.get('/servers/:server', async (req, res)=>{
     try {
-        let sql = 'SELECT server, description, created_at, server_type FROM alerts WHERE server LIKE ? ORDER BY created_at DESC';
+        let sql = 'SELECT server, description, created_at, server_type FROM alerts WHERE server = ? ORDER BY created_at DESC';
         let response = await qy(sql, ['%' + req.params.server + '%']);
         if (response.length > 0) {
             res.json(response);
