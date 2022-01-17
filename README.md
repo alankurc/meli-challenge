@@ -13,14 +13,14 @@ npm i
 ```
 
 ### The Database is [meli-db](https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql)
-### Also you can fill the database running this file [registros.sql](https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql)
+### Also you can fill the database running this archive [Registros.sql](https://github.com/alankurc/meli-challenge/tree/master/api/db/Registros.sql)
 
 
 ## 🚀 Running
 ### To run the API, you have to run the following command:
 ```bash
 cd api
-npm run start
+npm node api.js
 ```
 #### <i>Server use the port 3050</i>
 
@@ -34,7 +34,7 @@ npm start
 - Alerts list
 - Alert per issue
 - Alerts per Server
-- Servers with most alerts
+- Server with more alerts in the last month  <i>"http://localhost:3050/servers-more-alerts"</i>
 
 ## 👻 LICENCE
 [WTFPL](http://www.wtfpl.net/about/)
