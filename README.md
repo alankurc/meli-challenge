@@ -13,7 +13,7 @@ npm i
 ```
 
 ### The Database is [meli-db](https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql)
-### Also you can fill the database running this archive [Registros.sql](https://github.com/alankurc/meli-challenge/tree/master/api/db/Registros.sql)
+### Also you can fill the database running this file [Registros.sql](https://github.com/alankurc/meli-challenge/tree/master/api/db/Registros.sql)
 
 
 ## 🚀 Running
