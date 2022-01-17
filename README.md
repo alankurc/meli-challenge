@@ -34,7 +34,7 @@ npm start
 - Alerts list
 - Alert per issue
 - Alerts per Server
-- Server with most alerts in the last month
+- Server with more alerts in the last month  <i>"http://localhost:3050/servers-more-alerts"</i>
 
 ## 👻 LICENCE
 [WTFPL](http://www.wtfpl.net/about/)
