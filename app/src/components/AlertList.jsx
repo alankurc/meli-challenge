@@ -7,7 +7,7 @@ moment.locale("es-mx");
 
 const AlertList = ({alerts}) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [alertsPerPage] = useState(5);
+    const [alertsPerPage] = useState(10);
 
     //PAGINATION
     const indexOfLastAlert = currentPage * alertsPerPage;
