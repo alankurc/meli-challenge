@@ -20,7 +20,7 @@ npm i
 ### To run the API, you have to run the following command:
 ```bash
 cd api
-npm node api.js
+npm run start
 ```
 #### <i>Server use the port 3050</i>
 
