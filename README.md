@@ -12,16 +12,15 @@ cd api
 npm i
 ```
 
-### Database
-```bash
-The Database is [https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql]
-Also you can fill the database running this archive .sql [https://github.com/alankurc/meli-challenge/tree/master/api/db/registros.sql]
-```
+### The Database is [meli-db](https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql)
+### Also you can fill the database running this file [registros.sql](https://github.com/alankurc/meli-challenge/tree/master/api/db/meli-db.sql)
+
+
 ## 🚀 Running
 ### To run the API, you have to run the following command:
 ```bash
 cd api
-npm node api.js
+npm run start
 ```
 #### <i>Server use the port 3050</i>
 
